@@ -6,19 +6,18 @@ venv/
 env/
 
 # Self-driving data (huge, never commit)
+data/
 IMG/
 driving_log.csv
 *.jpg
 *.jpeg
-*.png
 
 # Trained models (big binaries)
 *.h5
 *.keras
-model/
 
-# Simulator
-beta_simulator*/
+# Keep result screenshots out of the ignore so we CAN commit a few docs later:
+!docs/*.png
 
 # OS / editor
 .DS_Store
