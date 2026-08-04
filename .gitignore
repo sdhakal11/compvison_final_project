@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Self-driving data (huge, never commit)
+IMG/
+driving_log.csv
+*.jpg
+*.jpeg
+*.png
+
+# Trained models (big binaries)
+*.h5
+*.keras
+model/
+
+# Simulator
+beta_simulator*/
+
+# OS / editor
+.DS_Store
+.vscode/
