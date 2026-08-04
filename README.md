@@ -44,6 +44,6 @@ compvison_final_project/
    Autonomous Mode.
 
 ## Team
-- (name) - lead / data pipeline
-- (name) - model + training
-- (name) - testing + docs
+- Daniel
+- Shaswot
+- Nishnath
