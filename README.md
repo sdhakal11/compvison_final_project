@@ -73,6 +73,6 @@ This will load `models/model.h5`, preprocess sample images from `data/IMG/`,
 run predictions, and print actual vs predicted steering values.
 
 ## Team
-- Daniel
-- Shaswot
-- Nishnath
+- Daniel Fu
+- Shaswot Dhakal
+- Nishnath Bandari
