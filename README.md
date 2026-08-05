@@ -1,27 +1,23 @@
 # Self-Driving Car Simulation using CNN
+DPS920 Final Project
 
-DPS920 Final Project. A convolutional neural network (Nvidia architecture) that
-predicts steering angles from front-camera images to drive a car autonomously
-in the Udacity self-driving car simulator.
+A convolutional neural network (Nvidia architecture) that predicts steering angles from front-camera images to drive a car autonomously in the Udacity self-driving car simulator.
 
-## Pipeline
-1. **Data collection** - drive manually in the simulator's Training Mode to
-   generate `IMG/` frames and `driving_log.csv`.
-2. **Balancing** - trim the over-represented straight-driving samples so the
-   steering histogram is balanced.
-3. **Augmentation** - random flip (with steering negated), brightness, zoom,
-   pan. Training set only.
-4. **Preprocessing** - crop road area -> Gaussian blur -> RGB to YUV ->
-   resize to 200x66 -> normalize.
-5. **Training** - Nvidia CNN, MSE loss, Adam optimizer.
-6. **Testing** - `TestSimulation.py` drives the car in Autonomous Mode.
-
+## Approach
+1. Data collection: drive manually in simulator Training Mode to generate image frames and steering labels.
+2. Data balancing: reduce the over-representation of straight-driving samples so the model doesn't become biased toward small steering angles.
+3. Augmentation: apply random flips, brightness changes, zoom, and pan to improve robustness.
+4. Preprocessing: crop the road area, apply Gaussian blur, convert from RGB to YUV, resize to 200x66, and normalize the img before training.
+5. Training: train the CNN using mean squared error loss and the Adam optimizer.
+6. Testing: run the saved model in the simulator through the provided testing script.
+   
 ## Project structure
 ```
 compvison_final_project/
 |-- README.md
 |-- .gitignore
 |-- package_list.txt          # provided by the course - environment setup
+|-- local_test.py             # test the model locally
 |-- data/                     # (gitignored) IMG/ + driving_log.csv
 |-- models/                   # (gitignored) saved model.h5
 |-- src/
@@ -37,40 +33,21 @@ compvison_final_project/
 |-- TestSimulation.py         # runs the model in the simulator
 ```
 
-## How to run
-1. Create a virtual environment and install dependencies:
-   ```
-   python -m venv .venv
-   .venv\Scripts\python.exe -m pip install -r requirements.txt
-   ```
-   (`package_list.txt` is the course-provided conda/Python 3.8 alternative if
-   you specifically need that environment instead.)
-2. Get the Udacity Term 1 simulator (search "udacity self driving car
-   simulator" if you don't already have it) and drive in Training Mode to
-   collect data, or use `scripts/make_mock_data.py` to generate a small
-   synthetic dataset for testing the pipeline without the simulator.
-3. Put your collected data in `data/` (so you have `data/IMG/` and
-   `data/driving_log.csv`).
-4. Train:  `.venv\Scripts\python.exe -m src.train`
-5. Test:   `.venv\Scripts\python.exe TestSimulation.py`, then launch the
-   simulator and pick Autonomous Mode.
+## Environment setup and running the model
+1. Create and activate a Python environment
+2. Install dependencies after setting up environment:
+   - python -m venv .venv
+   - .venv\Scripts\activate
+   - pip install -r package_list.txt
+3. Prepare the dataset by placing the collected simulator data in the data folder and the imgs in the data/IMG folder
+4. Train the model by running `python -m src.train`
+5. Test in the simulator by running `python TestSimulation.py`
+6. ???
+7. Profit
 
-### Note on TestSimulation.py dependency versions
-The simulator is an older Unity app that speaks an older Socket.IO wire
-protocol. `requirements.txt` pins `python-socketio`, `python-engineio`,
-`flask`, and Flask's dependency chain (Jinja2/Werkzeug/click/etc.) to older
-versions to match it - with current versions of those packages, Autonomous
-Mode connects but the car never receives steering commands (looks like
-nothing is happening). `eventlet` is pinned separately, just high enough to
-actually import on Python 3.12 (older eventlet releases use APIs Python
-removed).
-
-### Offline model sanity check
-If the Udacity simulator is not working, verify the saved model locally:
-    .venv\Scripts\python.exe local_test.py --num 10
-
-This will load `models/model.h5`, preprocess sample images from `data/IMG/`,
-run predictions, and print actual vs predicted steering values.
+## Challenges and solutions
+- The simulator wasn't working for some of us so we added an offline inference script to stress test the saved model to show predicted path vs actual path.
+- Straight-driving samples lead to imbalanced steering data so we addressed this by balancing the training data so that the model would learn a more useful steering distribution. 
 
 ## Team
 - Daniel Fu
