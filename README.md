@@ -32,20 +32,42 @@ compvison_final_project/
 |   |-- batch_generator.py    # yields training/validation batches
 |   |-- model.py              # Nvidia CNN (Figure 7)
 |   |-- train.py              # training entry point
+|-- scripts/
+|   |-- make_mock_data.py     # generates synthetic data for offline testing
 |-- TestSimulation.py         # runs the model in the simulator
 ```
 
 ## How to run
-1. Set up the environment from `package_list.txt` (TensorFlow GPU on Windows 10).
-2. Put your collected data in `data/` (so you have `data/IMG/` and
+1. Create a virtual environment and install dependencies:
+   ```
+   python -m venv .venv
+   .venv\Scripts\python.exe -m pip install -r requirements.txt
+   ```
+   (`package_list.txt` is the course-provided conda/Python 3.8 alternative if
+   you specifically need that environment instead.)
+2. Get the Udacity Term 1 simulator (search "udacity self driving car
+   simulator" if you don't already have it) and drive in Training Mode to
+   collect data, or use `scripts/make_mock_data.py` to generate a small
+   synthetic dataset for testing the pipeline without the simulator.
+3. Put your collected data in `data/` (so you have `data/IMG/` and
    `data/driving_log.csv`).
-3. Train:  `python -m src.train`
-4. Test:   `python TestSimulation.py`, then launch the simulator in
-   Autonomous Mode.
+4. Train:  `.venv\Scripts\python.exe -m src.train`
+5. Test:   `.venv\Scripts\python.exe TestSimulation.py`, then launch the
+   simulator and pick Autonomous Mode.
+
+### Note on TestSimulation.py dependency versions
+The simulator is an older Unity app that speaks an older Socket.IO wire
+protocol. `requirements.txt` pins `python-socketio`, `python-engineio`,
+`flask`, and Flask's dependency chain (Jinja2/Werkzeug/click/etc.) to older
+versions to match it - with current versions of those packages, Autonomous
+Mode connects but the car never receives steering commands (looks like
+nothing is happening). `eventlet` is pinned separately, just high enough to
+actually import on Python 3.12 (older eventlet releases use APIs Python
+removed).
 
 ### Offline model sanity check
 If the Udacity simulator is not working, verify the saved model locally:
-    python local_test.py --num 10
+    .venv\Scripts\python.exe local_test.py --num 10
 
 This will load `models/model.h5`, preprocess sample images from `data/IMG/`,
 run predictions, and print actual vs predicted steering values.
