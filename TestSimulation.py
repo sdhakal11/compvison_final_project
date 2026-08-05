@@ -50,13 +50,13 @@ def telemetry(sid, data):
     img = preprocess(img)
     img = np.array([img])
 
-    steering = float(model.predict(img, verbose=0))
+    steering = float(model.predict(img, verbose=0)[0][0])
     # simple throttle: slow down as we approach max speed
     throttle = 1.0 - (speed / MAX_SPEED)
     send_control(steering, throttle)
 
 
 if __name__ == "__main__":
-    model = load_model(config.MODEL_OUT)
+    model = load_model(config.MODEL_OUT, compile=False)
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(("", 4567)), app)
