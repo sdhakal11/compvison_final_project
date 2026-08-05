@@ -50,7 +50,7 @@ def telemetry(sid, data):
     img = preprocess(img)
     img = np.array([img])
 
-    steering = float(model.predict(img, verbose=0))
+    steering = float(model.predict(img, verbose=0)[0][0])
     # simple throttle: slow down as we approach max speed
     throttle = 1.0 - (speed / MAX_SPEED)
     send_control(steering, throttle)

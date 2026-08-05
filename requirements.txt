@@ -7,7 +7,21 @@ pandas
 opencv-python
 matplotlib
 scikit-learn
-python-socketio
-eventlet
-flask
 pillow
+
+# The Udacity Term 1 simulator speaks an older Socket.IO wire protocol.
+# These are pinned so TestSimulation.py can actually complete the handshake
+# with the simulator - newer python-socketio/python-engineio/flask versions
+# silently fail to connect (the "Autonomous Mode does nothing" symptom).
+# eventlet itself is NOT part of that old protocol, so it's pinned only high
+# enough to import on modern Python (3.12 removed the `imp` module and
+# `ssl.wrap_socket`, which broke eventlet <= 0.33).
+python-socketio==4.2.1
+python-engineio==3.8.2.post1
+eventlet==0.35.2
+flask==1.1.2
+Jinja2==2.11.3
+Werkzeug==1.0.1
+itsdangerous==1.1.0
+MarkupSafe==1.1.1
+click==7.1.2
