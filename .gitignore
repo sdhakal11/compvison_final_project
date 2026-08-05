@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Self-driving data (huge, never commit)
+data/
+IMG/
+driving_log.csv
+*.jpg
+*.jpeg
+
+# Trained models (big binaries)
+*.h5
+*.keras
+
+# Keep result screenshots out of the ignore so we CAN commit a few docs later:
+!docs/*.png
+
+# OS / editor
+.DS_Store
+.vscode/

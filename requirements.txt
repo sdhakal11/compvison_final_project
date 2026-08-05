@@ -1,0 +1,13 @@
+# NOTE: the course provides package_list.txt which is the authoritative
+# environment (tested for TensorFlow GPU on Windows 10). This file is just
+# a reference of the main libraries used.
+tensorflow
+numpy
+pandas
+opencv-python
+matplotlib
+scikit-learn
+python-socketio
+eventlet
+flask
+pillow
