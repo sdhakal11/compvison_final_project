@@ -38,7 +38,7 @@ compvison_final_project/
 2. Install dependencies after setting up environment:
    - python -m venv .venv
    - .venv\Scripts\activate
-   - pip install -r package_list.txt
+   - pip install -r requirements.txt
 3. Prepare the dataset by placing the collected simulator data in the data folder and the imgs in the data/IMG folder
 4. Train the model by running `python -m src.train`
 5. Test in the simulator by running `python TestSimulation.py`
