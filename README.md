@@ -42,9 +42,6 @@ compvison_final_project/
 3. Prepare the dataset by placing the collected simulator data in the data folder and the imgs in the data/IMG folder
 4. Train the model by running `python -m src.train`
 5. Test in the simulator by running `python TestSimulation.py`
-6. ???
-7. Profit
-
 ## Challenges and solutions
 - The simulator wasn't working for some of us so we added an offline inference script to stress test the saved model to show predicted path vs actual path.
 - Straight-driving samples lead to imbalanced steering data so we addressed this by balancing the training data so that the model would learn a more useful steering distribution. 
